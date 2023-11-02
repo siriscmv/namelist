@@ -1,6 +1,11 @@
 name: Generate and Push Index.html
 
 on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
   push:
     branches:
       - main
