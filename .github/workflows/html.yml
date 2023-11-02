@@ -36,13 +36,15 @@ jobs:
         run: |
           echo "<html><head><title>File List</title></head><body>" > index.html
           echo "<style>table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid #dddddd; text-align: left; padding: 8px; } th { background-color: #f2f2f2; }</style>" >> index.html
-          echo "<table><tr><th>Time</th><th>Filename</th><th>Content</th></tr>" >> index.html
+          # echo "<table><tr><th>Time</th><th>Filename</th><th>Content</th></tr>" >> index.html
+          echo "<table><tr><th>Filename</th><th>Content</th></tr>" >> index.html
           for file in $(ls -rt names/*); do
             filename=$(basename "$file")
             content=$(cat "$file")
             creation_time=$(stat -c %W "$file")
             ist_creation_time=$(date -d "@$creation_time" +'%H:%M:%S' -u --date='TZ="Asia/Kolkata"')
-            echo "<tr><td>$ist_creation_time</td><td>$filename</td><td>$content</td></tr>" >> index.html
+            # echo "<tr><td>$ist_creation_time</td><td>$filename</td><td>$content</td></tr>" >> index.html
+            echo "<tr><td>$filename</td><td>$content</td></tr>" >> index.html
           done
           echo "</table></body></html>" >> index.html
 
