@@ -48,7 +48,7 @@ jobs:
           git add index.html
           git commit -m "Auto-generate index.html"
           git push
- deploy:
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
