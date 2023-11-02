@@ -1,0 +1,42 @@
+name: Generate and Push Index.html
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: List Files and Contents
+        run: |
+          # Create the index.html file with a table
+          echo "<html><head><title>File List</title></head><body><table border='1'><tr><th>File Name</th><th>Content</th></tr>" > index.html
+
+          # List all files in the "names" folder and retrieve their content
+          for file in names/*; do
+            filename=$(basename "$file")
+            content=$(cat "$file")
+            echo "<tr><td>$filename</td><td>$content</td></tr>" >> index.html
+          done
+
+          # Close the HTML table and body
+          echo "</table></body></html>" >> index.html
+
+          # Commit and push the updated index.html
+          git config --global user.email "your-email@example.com"
+          git config --global user.name "Your Name"
+          git add index.html
+          git commit -m "Auto-generate index.html"
+          git push
+
+      - name: Push changes to GitHub
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
