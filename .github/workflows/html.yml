@@ -29,6 +29,8 @@ jobs:
           echo "</table></body></html>" >> index.html
 
           # Commit and push the updated index.html
+          git config --global user.email "bot@github.com"
+          git config --global user.name "Bot"
           git add index.html
           git commit -m "Auto-generate index.html"
           git push
