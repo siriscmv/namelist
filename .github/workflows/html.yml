@@ -1,4 +1,4 @@
-name: Generate and Push Index.html
+name: Generate and Deploy Index.html
 
 on:
   pull_request:
@@ -22,8 +22,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  generate_and_push:
+  generate_and_deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Check out code
@@ -48,14 +51,7 @@ jobs:
           git add index.html
           git commit -m "Auto-generate index.html"
           git push
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+          
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
