@@ -40,8 +40,9 @@ jobs:
           for file in $(ls -rt names/*); do
             filename=$(basename "$file")
             content=$(cat "$file")
-            modification_time=$(stat -c %Y "$file")
-            echo "<tr><td>$(date -d @$modification_time)</td><td>$filename</td><td>$content</td></tr>" >> index.html
+            creation_time=$(stat -c %W "$file")
+            ist_creation_time=$(date -d "@$creation_time" +'%H:%M:%S' -u --date='TZ="Asia/Kolkata"')
+            echo "<tr><td>$ist_creation_time</td><td>$filename</td><td>$content</td></tr>" >> index.html
           done
           echo "</table></body></html>" >> index.html
 
