@@ -40,7 +40,7 @@ jobs:
           echo "<table><tr><th>S.No.</th><th>Filename</th><th>Content</th></tr>" >> index.html
           i=0
           for file in $(ls -rt names/*); do
-            i=$(i+1)
+            i=$((i+1))
             filename=$(basename "$file")
             content=$(cat "$file")
             creation_time=$(stat -c %W "$file")
