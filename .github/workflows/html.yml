@@ -45,8 +45,8 @@ jobs:
             content=$(cat "$file")
             creation_time=$(stat -c %W "$file")
             ist_creation_time=$(date -d "@$creation_time" +'%H:%M:%S' -u --date='TZ="Asia/Kolkata"')
-            # echo "<tr><td>$i</td><td>$ist_creation_time</td><td>$filename</td><td>$content</td></tr>" >> index.html
-            echo "<tr><td>$filename</td><td>$content</td></tr>" >> index.html
+            # echo "<tr><td>$ist_creation_time</td><td>$filename</td><td>$content</td></tr>" >> index.html
+            echo "<tr><td>$i</td><td>$filename</td><td>$content</td></tr>" >> index.html
           done
           echo "</table></body></html>" >> index.html
 
